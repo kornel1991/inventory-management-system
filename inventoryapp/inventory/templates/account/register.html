@@ -1,0 +1,61 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+	<div class="container">
+		<div class="d-flex justify-content-center h-100">
+			<!-- Material form login -->
+            <div class="card">
+              <h5 class="card-header info-color white-text text-center py-4">
+                <strong>Sign Up</strong>
+              </h5>
+
+              <!--Card content-->
+              <div class="card-body px-lg-5 pt-0">
+
+                <!-- Form -->
+                <form class="text-center" style="color: #757575;" action="" method="POST">
+                {% csrf_token %}
+                  {% for field in form %}
+                  <div class="md-form">
+                    {{ field.errors }}
+            <!--        <label> {{ field.label_tag }}</label>-->
+                    <p>{{ field }}</p>
+                  </div>
+                  {% endfor %}
+                  <div class="d-flex justify-content-around">
+                    <div>
+                      <!-- Forgot password -->
+                      <a href="">Forgot password?</a>
+                    </div>
+                  </div>
+
+                  <!-- Sign in button -->
+                  <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Register</button>
+
+                  <!-- Register -->
+                  <p>Already have an account?
+                    <a href="{% url 'login' %}">Login</a>
+                  </p>
+                </form>
+                <!-- Form -->
+                {{form.errors}}
+              </div>
+
+            </div>
+<!-- Material form login -->
+		</div>
+	</div>
+	<script>
+		var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='Username';
+		form_fields[2].placeholder='Email';
+		form_fields[3].placeholder='Enter password';
+		form_fields[4].placeholder='Re-enter Password';
+
+
+		for (var field in form_fields){
+			form_fields[field].className += ' form-control'
+		}
+	</script>
+
+    {% endblock%}

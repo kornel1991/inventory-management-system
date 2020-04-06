@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% include 'status.html' %}
+
+<div class="row">
+        <div class="col">
+            <div class="card mb-3 mt-4" id="">
+                <div class="card-header text-white">
+                    <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col">Product</th>
+                              <th scope="col">Category</th>
+                                <th scope="col">Date Ordered</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                          </thead>
+                            {%  for order in orders %}
+                            <tr>
+                                <td>{{ order.product }}</td>
+                                <td>{{ order.product.category }}</td>
+                                <td>{{ order.date_created }}</td>
+                                <td>{{ order.status }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

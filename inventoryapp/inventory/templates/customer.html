@@ -1,0 +1,100 @@
+    {% extends 'layout.html' %}
+
+    {% block content %}
+
+    <br>
+
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3 h-100" id="orders-total">
+                <div class="card-header text-center text-white">
+                    <h5 class="card-title">Customer</h5>
+                </div>
+                <div class="card-body">
+                    <a href="" class="btn mb-3 btn-secondary btn-sm btn-block">Update Customer</a>
+                    <a href="{% url 'create_order' customer.id %}" class="btn btn-primary btn-sm btn-block">Place Order</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card mb-3 h-100" id="orders-delivered">
+                <div class="card-header text-center text-white">
+                    <h5 class="card-title">Contact Information</h5>
+                </div>
+                <div class="card-body">
+                    <form action="get">
+                        <div class="form-group">
+                            <p class="text-white">Email: {{ customer.email }}</p>
+                            <p class="text-white">Mobile: {{ customer.phone }}</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <div class="card mb-3 h-100" id="total-orders">
+                <div class="card-header text-center text-white">
+                    <h5 class="card-title">Total Orders</h5>
+                </div>
+                <div class="card-body">
+                    <h1 class="text-center text-white">{{ order_count }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3 mt-3" id="search">
+
+                <div class="card-header text-center text-white">
+                    <h5>Search</h5>
+                </div>
+                <div class="card-body">
+                    <form class="form-inline" action="get">
+                        {{myfilter.form}}
+                        <div class="form-group">
+                            <button class="btn btn-primary mr-2">Search</button>
+                            <input type="text" class="form-control " id="search" name="search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="card mb-3" id="">
+                <div class="card-header text-white">
+                    <div class="table-responsive">
+                        <table class="table ">
+                          <thead>
+                            <tr>
+                              <th scope="col">Product</th>
+                              <th scope="col">Category</th>
+                                <th scope="col">Date Ordered</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Update</th>
+                                <th scope="col">Remove</th>
+                            </tr>
+                          </thead>
+                            {%  for order in orders %}
+                            <tr>
+                                <td>{{ order.product }}</td>
+                                <td>{{ order.product.category }}</td>
+                                <td>{{ order.date_created }}</td>
+                                <td>{{ order.status }}</td>
+                                <td><a class="btn btn-info" href="{% url 'update_order' order.id %}">Update</a></td>
+                                <td><a class="btn btn-danger" href="{% url 'delete_order' order.id %}">Remove</a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
